@@ -7,7 +7,7 @@ $db = new Database($config['database']);
 $heading = "Note";
 $currentUserId = 7;
 
-$note = $db->query("select * from notes where id = ?", param: [$_GET['id']])->fetch();
+$note = $db->query("select * from notes where id = ?",  [$_GET['id']])->fetch();
 
 if (!$note) {
     abort(404);
