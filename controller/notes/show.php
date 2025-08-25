@@ -17,4 +17,4 @@ if ($note['user_id'] !== $currentUserId) {
     abort(403);
 }
 
-require "views/note.view.php";
+require "views/notes/show.view.php";

@@ -1,6 +1,6 @@
-<?php require "partials/header.php"; ?>
-<?php require "partials/nav.php"; ?>
-<?php require "partials/banner.php"; ?>
+<?php require "views/partials/header.php"; ?>
+<?php require "views/partials/nav.php"; ?>
+<?php require "views/partials/banner.php"; ?>
 
 <main>
     <main>
@@ -19,7 +19,6 @@
                                             placeholder="Here's an idea for a note..."><?= $_POST['body'] ?? '' ?></textarea>
                                         <?php if (isset($error['body'])): ?>
                                             <p class="text-red-500 text-xs mt-2"><?= $error['body'] ?></p>
-
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -40,4 +39,4 @@
     </main>
 </main>
 
-<?php require "partials/footer.php"; ?>
+<?php require "views/partials/footer.php"; ?>

@@ -14,4 +14,4 @@ $notes = $db->query($query, param: [$id])->fetchAll();
 
 
 $heading = "My Notes";
-require "views/notes.view.php";
+require "views/notes/index.view.php";
