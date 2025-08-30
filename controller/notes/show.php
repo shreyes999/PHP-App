@@ -1,10 +1,12 @@
 <?php
 
-$config = require("config.php");
+use Core\Database;
+
+$config = require base_path("config.php");
 
 $db = new Database($config['database']);
 
-$heading = "Note";
+
 $currentUserId = 7;
 
 $note = $db->query("select * from notes where id = ?",  [$_GET['id']])->fetch();
@@ -17,4 +19,7 @@ if ($note['user_id'] !== $currentUserId) {
     abort(403);
 }
 
-require "views/notes/show.view.php";
+require view("notes/show.view.php", [
+    'heading' => 'Note',
+    'note' => $note
+]);

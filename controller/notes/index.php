@@ -1,6 +1,8 @@
 <?php
 
-$config = require("config.php");
+use Core\Database;
+
+$config = require base_path("config.php");
 
 $db = new Database($config['database']);
 // $id = $_GET['id'];
@@ -12,6 +14,7 @@ $query = "select * from notes where user_id = ? ";
 $id = 7;
 $notes = $db->query($query, param: [$id])->fetchAll();
 
-
-$heading = "My Notes";
-require "views/notes/index.view.php";
+require view("notes/index.view.php", [
+    'heading' => 'My Notes',
+    'notes' => $notes
+]);
