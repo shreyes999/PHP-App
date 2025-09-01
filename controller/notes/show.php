@@ -5,21 +5,26 @@ use Core\Database;
 $config = require base_path("config.php");
 
 $db = new Database($config['database']);
-
-
 $currentUserId = 7;
 
-$note = $db->query("select * from notes where id = ?",  [$_GET['id']])->fetch();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-if (!$note) {
-    abort(404);
+    $note = $db->query("select * from notes where id = ?",  [$_GET['id']])->fetch();
+
+    authorize($note['user_id'] === $currentUserId);
+    $db->query("delete from notes where id=:id", [
+        'id' => $_POST['id'],
+    ]);
+    header('Location:/notes');
+    exit();
+} else {
+
+    $note = $db->query("select * from notes where id = ?",  [$_GET['id']])->fetch();
+
+    authorize($note['user_id'] === $currentUserId);
+
+    require view("notes/show.view.php", [
+        'heading' => 'Note',
+        'note' => $note
+    ]);
 }
-
-if ($note['user_id'] !== $currentUserId) {
-    abort(403);
-}
-
-require view("notes/show.view.php", [
-    'heading' => 'Note',
-    'note' => $note
-]);
