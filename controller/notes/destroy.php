@@ -9,12 +9,15 @@ $currentUserId = 7;
 
 $note = $db->query(
     "select * from notes where id = ?",
-    [$_GET['id']]
+    [$_POST['id']]
 )->fetch();
+
 
 authorize($note['user_id'] === $currentUserId);
 
-require view("notes/show.view.php", [
-    'heading' => 'Note',
-    'note' => $note
+$db->query("delete from notes where id=:id", [
+    'id' => $_POST['id'],
 ]);
+
+header('Location:/notes');
+exit();

@@ -6,37 +6,33 @@ class Router
 {
     protected $routes = [];
 
-    public function get($uri, $controller)
+    public function add($uri, $controller, $method)
     {
         $this->routes[] = [
             'uri' => $uri,
             'controller' => $controller,
-            'method' => 'GET'
+            'method' => $method
         ];
+    }
+    public function get($uri, $controller)
+    {
+        $this->add($uri, $controller, 'GET');
+    }
+    public function delete($uri, $controller)
+    {
+        $this->add($uri, $controller, 'DELETE');
     }
     public function post($uri, $controller)
     {
-        $this->routes[] = [
-            'uri' => $uri,
-            'controller' => $controller,
-            'method' => 'POST'
-        ];
+        $this->add($uri, $controller, 'POST');
     }
     public function patch($uri, $controller)
     {
-        $this->routes[] = [
-            'uri' => $uri,
-            'controller' => $controller,
-            'method' => 'PATCH'
-        ];
+        $this->add($uri, $controller, 'PATCH');
     }
     public function put($uri, $controller)
     {
-        $this->routes[] = [
-            'uri' => $uri,
-            'controller' => $controller,
-            'method' => 'PUT'
-        ];
+        $this->add($uri, $controller, 'PUT');
     }
     public function route($uri, $method)
     {
