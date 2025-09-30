@@ -1,10 +1,9 @@
 <?php
 
-use Core\Database;
+use Core\App;
 
-$config = require base_path("config.php");
+$db = App::resolve('Core\Database');
 
-$db = new Database($config['database']);
 $currentUserId = 7;
 
 $note = $db->query(
