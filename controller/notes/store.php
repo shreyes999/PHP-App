@@ -7,7 +7,7 @@ $db = App::resolve('Core\Database');
 
 $error = [];
 
-if (!validator::string($_POST['body'], 1, 1000)) {
+if (!Validator::string($_POST['body'], 1, 1000)) {
     $error['body'] = 'A body of no more than 1,000 characters is required';
 }
 if (!empty($error)) {

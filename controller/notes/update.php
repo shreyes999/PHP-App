@@ -15,7 +15,7 @@ $note = $db->query(
 authorize($note['user_id'] === $currentUserId);
 
 $error = [];
-if (!validator::string($_POST['body'], 1, 1000)) {
+if (!Validator::string($_POST['body'], 1, 1000)) {
     $error['body'] = 'A body of no more than 1,000 characters is required';
 }
 if (count($error)) {
