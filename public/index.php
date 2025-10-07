@@ -2,7 +2,7 @@
 
 const BASE_PATH = __DIR__ . "/../";
 
-
+session_start();
 require BASE_PATH . "Core/functions.php";
 // require base_path("/Database.php");
 spl_autoload_register(function ($class) {
