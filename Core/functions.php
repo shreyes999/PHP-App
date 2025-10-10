@@ -41,3 +41,20 @@ function authorize($condition, $status = Response::FORBIDDEN)
 
     return true;
 }
+function login($email)
+{
+    $_SESSION['user'] = [
+        'email' => $email
+    ];
+    session_regenerate_id(true);
+}
+function logout()
+{
+    $_SESSION = [];
+
+    session_destroy();
+
+    $param = session_get_cookie_params();
+
+    setcookie('PHPSESSID', '', time() - 3600, $param['path'], $param['secure'], $param['httponly']);
+}

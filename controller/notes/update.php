@@ -5,14 +5,17 @@ use Core\Validator;
 
 $db = App::resolve('Core\Database');
 
-$currentUserId = 7;
+$currentUserEmail = $_SESSION['user']['email']['email'];
+$currentUserId = $db->query('select (id) from users where email = :email', [
+    'email' => $currentUserEmail
+])->fetch();
 
 $note = $db->query(
     "select * from notes where id = ?",
     [$_POST['id']]
 )->fetch();
 
-authorize($note['user_id'] === $currentUserId);
+authorize($note['user_id'] === $currentUserId['id']);
 
 $error = [];
 if (!Validator::string($_POST['body'], 1, 1000)) {

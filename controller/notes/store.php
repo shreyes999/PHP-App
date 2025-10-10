@@ -16,10 +16,14 @@ if (!empty($error)) {
         'error' => $error
     ]);
 }
+$currentUserEmail = $_SESSION['user']['email']['email'];
+$currentUserId = $db->query('select (id) from users where email = :email', [
+    'email' => $currentUserEmail
+])->fetch();
 
 $db->query("INSERT INTO `tables`.`notes` (`body`, `user_id`) VALUES (:body, :user_id) ", [
     'body' => $_POST['body'],
-    'user_id' => 7
+    'user_id' => $currentUserId['id']
 ]);
 
 header('location: /notes');
