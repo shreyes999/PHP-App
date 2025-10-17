@@ -1,5 +1,6 @@
 <?php
 
+use Core\Session;
 use Http\Forms\Authenticator;
 use Http\Forms\LoginForm;
 
@@ -17,6 +18,10 @@ if ($form->validate($email, $password)) {
     $form->addError('emailPass', 'No matching account found for email address and password');
 }
 
-return view('session/create.view.php', [
-    'error' => $form->error()
+Session::flash('error', $form->error());
+Session::flash('old', [
+    'email' => $_POST['email']
 ]);
+
+header('location:/login');
+exit();
